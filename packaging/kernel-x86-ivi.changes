@@ -1,4 +1,9 @@
 * Thu Nov 07 2013 Artem Bityutskiy <artem.bityutskiy@linux.intel.com> 3.12.0
+- Another back-port from the drm-intel tree: fix VGA hotplug after modeset
+- Back-port a couple of SMACK patches from linux-next: add a "lock" access
+  mode and improve ptrace access checks.
+
+* Thu Nov 07 2013 Artem Bityutskiy <artem.bityutskiy@linux.intel.com> 3.12.0
 - Back-port a drm patch which fixes a problem preventing us from booting to the
   UI on a ByT-I board. Fixes TIVI-2085.
 
