@@ -1,3 +1,9 @@
+* Tue Dec 10 2013 Artem Bityutskiy <artem.bityutskiy@linux.intel.com> 3.12.4
+- Fix TIVI-2282 by back-porting 4 patches from the drm-intel tree.
+
+* Tue Dec 10 2013 Artem Bityutskiy <artem.bityutskiy@linux.intel.com> 3.12.4
+- Upgrade to version 3.12.4.
+
 * Fri Dec 06 2013 Artem Bityutskiy <artem.bityutskiy@linux.intel.com> 3.12.3
 - Enable the PEAK USB CAN driver, fixes TIVI-2263.
 
