@@ -7,7 +7,15 @@
 %define variant x86-generic
 %define kernel_version %{version}-%{release}
 %define kernel_full_version %{version}-%{release}-%{variant}
+
+%ifarch i386 i586 i686 %{ix86}
 %define kernel_arch i386
+%endif
+
+%ifarch x86_64
+%define kernel_arch x86_64
+%endif
+
 %define kernel_arch_subdir arch/x86
 
 Name: kernel-%{variant}
@@ -41,7 +49,7 @@ BuildRequires: flex
 BuildRequires: bison
 BuildRequires: libdw-devel
 BuildRequires: python-devel
-ExclusiveArch: %{ix86} x86_64
+ExclusiveArch: i386 i586 i686 %{ix86} x86_64
 
 Provides: kernel = %{version}-%{release}
 Provides: kernel-uname-r = %{kernel_full_version}
@@ -62,7 +70,7 @@ Source0: %{name}-%{version}.tar.bz2
 
 
 %description
-This package contains the Tizen IVI Linux kernel
+This package contains the Tizen Generic Linux kernel
 
 
 %package devel
@@ -81,7 +89,7 @@ against the %{variant} kernel package.
 
 %package -n perf
 Summary: The 'perf' performance counter tool
-Group: System Environment/Kernel
+Group: System/Kernel
 Provides: perf = %{kernel_full_version}
 Requires: %{name} = %{version}-%{release}
 
@@ -112,7 +120,7 @@ make -s -C tools/lib/traceevent ARCH=%{kernel_arch} %{?_smp_mflags}
 make -s -C tools/perf WERROR=0 ARCH=%{kernel_arch}
 
 # Build kernel and modules
-make -s ARCH=%{kernel_arch} ivi_defconfig
+make -s ARCH=%{kernel_arch} generic_defconfig
 make -s ARCH=%{kernel_arch} %{?_smp_mflags} bzImage
 make -s ARCH=%{kernel_arch} %{?_smp_mflags} modules
 
