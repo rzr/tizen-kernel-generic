@@ -4,7 +4,7 @@
 #
 
 %define upstream_version 3.12.4
-%define variant x86-ivi
+%define variant x86-generic
 %define kernel_version %{version}-%{release}
 %define kernel_full_version %{version}-%{release}-%{variant}
 %define kernel_arch i386
@@ -41,7 +41,7 @@ BuildRequires: flex
 BuildRequires: bison
 BuildRequires: libdw-devel
 BuildRequires: python-devel
-ExclusiveArch: %{ix86}
+ExclusiveArch: %{ix86} x86_64
 
 Provides: kernel = %{version}-%{release}
 Provides: kernel-uname-r = %{kernel_full_version}
