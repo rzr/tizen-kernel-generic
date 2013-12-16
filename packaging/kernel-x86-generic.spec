@@ -10,7 +10,7 @@
 %define arch_32bits i386 i586 i686 %{ix86}
 
 %ifarch %{arch_32bits}
-%define kernel_arch i586
+%define kernel_arch i386
 %endif
 
 %ifarch x86_64
