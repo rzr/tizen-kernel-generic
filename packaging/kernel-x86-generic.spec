@@ -7,9 +7,10 @@
 %define variant x86-generic
 %define kernel_version %{version}-%{release}
 %define kernel_full_version %{version}-%{release}-%{variant}
+%define 32bits_arch i386 i586 i686 %{ix86}
 
-%ifarch i386 i586 i686 %{ix86}
-%define kernel_arch i386
+%ifarch %{32bits_arch}
+%define kernel_arch i586
 %endif
 
 %ifarch x86_64
@@ -49,7 +50,7 @@ BuildRequires: flex
 BuildRequires: bison
 BuildRequires: libdw-devel
 BuildRequires: python-devel
-ExclusiveArch: i386 i586 i686 %{ix86} x86_64
+ExclusiveArch: %{32bits_arch} x86_64
 
 Provides: kernel = %{version}-%{release}
 Provides: kernel-uname-r = %{kernel_full_version}
@@ -120,7 +121,14 @@ make -s -C tools/lib/traceevent ARCH=%{kernel_arch} %{?_smp_mflags}
 make -s -C tools/perf WERROR=0 ARCH=%{kernel_arch}
 
 # Build kernel and modules
-make -s ARCH=%{kernel_arch} generic_defconfig
+%ifarch %{32bits_arch}
+make -s ARCH=%{kernel_arch} generic_x86_defconfig
+%endif
+
+%ifarch x86_64
+make -s ARCH=%{kernel_arch} generic_x86_64_defconfig
+%endif
+
 make -s ARCH=%{kernel_arch} %{?_smp_mflags} bzImage
 make -s ARCH=%{kernel_arch} %{?_smp_mflags} modules
 
