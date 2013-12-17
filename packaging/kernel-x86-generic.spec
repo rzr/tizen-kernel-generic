@@ -56,6 +56,11 @@ Provides: kernel-uname-r = %{kernel_full_version}
 Requires(post): /usr/bin/ln
 Requires(post): /usr/bin/sort
 Requires(post): rpm
+
+Requires(post): /usr/sbin/depmod
+Requires(post): /usr/bin/dracut
+Requires(post): /usr/bin/kmod
+
 Requires(postun): /usr/bin/ln
 Requires(postun): /usr/bin/sed
 Requires(postun): rpm
@@ -227,6 +232,8 @@ else
 		printf "%s\n" "$result" 1>&2
 	fi
 fi
+
+/usr/bin/dracut /boot/initrd-%{kernel_full_version}.img %{kernel_full_version}
 
 %post devel
 if [ -x /usr/sbin/hardlink ]; then
